@@ -5,11 +5,11 @@ const messages = document.getElementsByClassName('message');
 const tooHighMessage = document.getElementById('too-high');
 const tooLowMessage = document.getElementById('too-low');
 const maxGuessesMessage = document.getElementById('max-guesses');
-const numberOfGuessesMessage = document.getElementById('num-of-guesses');
+const numberOfGuessesMessage = document.getElementById('number-of-guesses'); //syntax error in iId
 const correctMessage = document.getElementById('correct');
 
 let targetNumber;
-const attempts = 0;
+let attempts = 0;
 const maxNumberOfAttempts = 5;
 
 // Returns a random number from min (inclusive) to max (exclusive)
@@ -27,7 +27,7 @@ function checkGuess() {
   const guess = parseInt(guessInput.value, 10);
   attempts = attempts + 1;
 
-  hideAllMessages();
+  hideAllMessages();  
 
   if (guess === targetNumber) {
     numberOfGuessesMessage.style.display = '';
@@ -40,10 +40,10 @@ function checkGuess() {
   }
 
   if (guess !== targetNumber) {
-    if (guess < targetNumber) {
+     if (guess < targetNumber) {
       tooLowMessage.style.display = '';
     } else {
-      tooLowMessage.style.display = '';
+      tooHighMessage.style.display = ''; // tooLowMessage instead tooHighMessage
     }
 
     const remainingAttempts = maxNumberOfAttempts - attempts;
@@ -52,7 +52,7 @@ function checkGuess() {
     numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
   }
 
-  if (attempts ==== maxNumberOfAttempts) {
+  if (attempts === maxNumberOfAttempts) {       //extra equal sign was added in this string 
     submitButton.disabled = true;
     guessInput.disabled = true;
   }
@@ -63,18 +63,15 @@ function checkGuess() {
 }
 
 function hideAllMessages() {
-  for (let elementIndex = 0; elementIndex <= messages.length; elementIndex++) {
+  for (let elementIndex = 0; elementIndex < messages.length; elementIndex++) { //using elementIndex<=messages.length instead '<'
     messages[elementIndex].style.display = 'none';
   }
 }
 
-funtion setup() {
+function setup() {              //syntax error
   // Get random number
   targetNumber = getRandomNumber(1, 100);
   console.log(`target number: ${targetNumber}`);
-
-  // Reset number of attempts
-  maxNumberOfAttempts = 0;
 
   // Enable the input and submit button
   submitButton.disabeld = false;
